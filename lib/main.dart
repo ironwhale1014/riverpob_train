@@ -43,7 +43,7 @@ class MyHomePage extends ConsumerWidget {
               children: [
                 ElevatedButton(
                     onPressed: () {
-                      ref.read(counterProvider.notifier).increment();
+                      ref.watch(counterProvider.notifier).increment();
                     },
                     child: const Icon(Icons.plus_one)),
                 SizedBox(
@@ -51,7 +51,7 @@ class MyHomePage extends ConsumerWidget {
                 ),
                 ElevatedButton(
                     onPressed: () {
-                      ref.read(counterProvider.notifier).decrement();
+                      ref.watch(counterProvider.notifier).decrement();
                     },
                     child: const Icon(Icons.exposure_minus_1)),
               ],
