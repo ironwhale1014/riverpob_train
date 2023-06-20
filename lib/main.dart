@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-final helloProvider = Provider<String>((ref) {
-  return "hello RiverPod";
-});
+import 'package:riverpob_train/providers.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -33,8 +30,35 @@ class MyHomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final String value = ref.watch(helloProvider);
+    var watch = ref.watch(counterProvider);
     return Scaffold(
       appBar: AppBar(title: Text(value)),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("$watch"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                    onPressed: () {
+                      ref.read(counterProvider.notifier).increment();
+                    },
+                    child: const Icon(Icons.plus_one)),
+                SizedBox(
+                  width: 10,
+                ),
+                ElevatedButton(
+                    onPressed: () {
+                      ref.read(counterProvider.notifier).decrement();
+                    },
+                    child: const Icon(Icons.exposure_minus_1)),
+              ],
+            )
+          ],
+        ),
+      ),
     );
   }
 }
